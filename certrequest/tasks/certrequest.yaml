@@ -1,0 +1,35 @@
+---
+- name: read which CA to work with
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_dns.search[0] }}.yml"
+    - "prod1.yml"
+  no_log: true
+
+- name: deploy dependencies
+  copy:
+    src: "{{ item.f }}"
+    dest: "/tmp/{{ item.f }}"
+    mode: "{{ item.m }}"
+    owner: root
+    group: root
+  with_items:
+    - { f: "framework.sh", m: "0755" }
+    - { f: "certrequest.conf", m: "0644" }
+  changed_when: false
+
+- name: request certificate
+  script: certrequest.sh -c /tmp/certrequest.conf -u "{{ ca_user }}" -p "{{ ca_pass }}" -t "{{ ca_template }}" --ca "{{ ca_host }}"
+  register: certrequest
+
+- debug:
+    msg: "{{ certrequest }}"
+
+- name: cleanup
+  file:
+    path: "/tmp/{{ item.f }}"
+    state: absent
+  with_items:
+    - { f: "framework.sh", m: "0755" }
+    - { f: "certrequest.conf", m: "0644" }
+  changed_when: false

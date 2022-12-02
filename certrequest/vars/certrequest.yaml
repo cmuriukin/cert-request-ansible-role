@@ -1,0 +1,5 @@
+domain: nginx.example.com
+ca_host: ca2.nginx.example.com
+ca_user: user
+ca_pass: ExamplePW55*
+ca_template: "ConfigMgrLinuxClientCertificate"

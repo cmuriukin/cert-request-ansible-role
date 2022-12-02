@@ -1,0 +1,10 @@
+---
+# tasks file for certrequest
+---
+- block:
+  #- ping:
+  - include_tasks: certrequest.yml
+  - include_tasks: deploy_nginx.yaml
+  become: true
+  become_user: root
+  become_method: sudo

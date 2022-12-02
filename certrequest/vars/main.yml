@@ -1,0 +1,8 @@
+---
+# vars file for certrequest
+- hosts: all
+  tasks:
+    - include: tasks/main.yml
+    handlers:
+    - include: handlers/main.yml
+...

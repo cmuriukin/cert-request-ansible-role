@@ -1,0 +1,9 @@
+---
+# handlers file for certrequest
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted
+ 
+- wait_for:
+    port: 443

@@ -1,0 +1,21 @@
+---
+- copy:
+  src: ../../files/self-signed.conf  #add correct locations
+  dest: /etc/nginx/snippets/self-signed.conf
+  owner: root
+  group: root
+  mode: 0644
+ 
+- copy:
+  src: ../../files/ssl-params.conf  #add correct locations
+  dest: /etc/nginx/snippets/ssl-params.conf
+  owner: root
+  group: root
+  mode: 0644
+ 
+- copy:
+  src: ../../files/google.com  #add correct locations
+  dest: /etc/nginx/sites-enabled/google.com
+  owner: root
+  group: root
+  mode: 0644
